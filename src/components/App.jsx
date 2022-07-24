@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form/form'
 import Filter from './Filter/filter';
 import { nanoid } from 'nanoid'
+import Contacts from './Contacts/contacts';
 
 
 export class App extends React.Component {
@@ -18,11 +19,16 @@ export class App extends React.Component {
   
   takeData = (evt) => {
     const { name, number } = evt;
-     this.setState(prevState => {
-      return {
-        contacts: [ { name, number, id: nanoid() }, ...prevState.contacts]
-      }
-    })
+
+    const takeContactName = this.state.contacts.find(contact => contact.name === name)
+    if (takeContactName) {
+    alert(`${name} is already in contacts`)
+     }
+      this.setState(prevState => {
+        return {
+          contacts: [{ name, number, id: nanoid() }, ...prevState.contacts]
+        }
+      })
   }
 
   changeInput = (evt) => { 
@@ -46,12 +52,7 @@ export class App extends React.Component {
         
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.changeInput} />
-       <ul>
-          {onChangeInput.map(item => (
-            <li key={item.id}>{item.name} :{item.number}
-            <button onClick={()=>this.onDelete(item.id)}>Delete</button></li>
-            ))}
-        </ul> 
+        <Contacts value={onChangeInput} onDelete={this.onDelete} />
         </div>
     )
    }

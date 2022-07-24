@@ -1,5 +1,7 @@
 import React from 'react';
 import { nanoid } from 'nanoid'
+import PropTypes from 'prop-types';
+import css from './form.module.css'
 
 export default class Form extends React.Component {
 state = {
@@ -27,8 +29,8 @@ state = {
     return (
       <>
       <form onSubmit={this.onSuubmit}>
-      <label>
-      Name <input
+          <label className={css.label}>
+      Name <input className={css.input}
         type="text"
             name="name"
             id={idName}
@@ -38,8 +40,8 @@ state = {
   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
   required
             /> </label>
-          <label>Number 
-            <input
+          <label className={css.label}>Number 
+            <input className={css.input}
    onChange={this.onChange}
   type="tel"
   name="number"
@@ -54,3 +56,7 @@ state = {
         </>)
    }
 }
+
+Form.propTypes = {
+    onClick: PropTypes.func.isRequired,
+};
