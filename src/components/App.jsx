@@ -20,9 +20,10 @@ export class App extends React.Component {
   takeData = (evt) => {
     const { name, number } = evt;
 
-    const takeContactName = this.state.contacts.find(contact => contact.name === name)
+    const takeContactName = this.state.contacts.find(contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase())
     if (takeContactName) {
-    alert(`${name} is already in contacts`)
+      alert(`${name} is already in contacts`)
+      return
      }
       this.setState(prevState => {
         return {
